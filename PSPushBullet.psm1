@@ -2,6 +2,20 @@
 
     $ExportParams = @{}
 
+    $PBAPIUrl = 'https://api.pushbullet.com/v2'
+
+    $PBAPIKey = ''
+
+    try
+    {
+        # TODO: Proper management of token
+        $PBAPIKey = Import-Clixml -Path "$PSScriptRoot\APIKey.xml"
+    }
+    catch
+    {
+        # Nothing to do here
+    }
+
 #region Public Functions
 
     # Name of the folder for public function ps1 files
