@@ -14,18 +14,18 @@ function Send-PBPush
     [Alias()]
     Param
     (
-        # Device to send the push to
+        # The push
         [Parameter(Mandatory=$true,
                    ValueFromPipeline=$true)]
         [ValidateNotNullOrEmpty()]
         $Push,
-
+        
         # Device to send the push to
         [Parameter(Mandatory=$true,
                    ValueFromPipelineByPropertyName=$true, 
                    ParameterSetName='UserDevice')]
         [ValidateNotNullOrEmpty()]
-        [Alias("device_iden")]
+        [Alias("iden")]
         $DeviceID,
 
         # Email to send the push to
@@ -54,6 +54,16 @@ function Send-PBPush
 
     Process
     {
+        # Build the request body
+                switch ($PSCmdlet.ParameterSetName)
+        {
+            'UserDevice'
+            {
+                $Push.Add("device_iden",$DeviceID)
+            }
+            Default {throw "Bad ParameterSet"}
+        }
+
         if ($pscmdlet.ShouldProcess("Push", "Send"))
         {
             # Invoke the API
