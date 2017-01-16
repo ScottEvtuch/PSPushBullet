@@ -24,7 +24,7 @@ function Invoke-PBAPI
         $Method,
         
         # Hashtable of request properties
-        [Parameter(Mandatory=$true)]
+        [Parameter()]
         [System.Collections.Hashtable]
         $Body
     )
