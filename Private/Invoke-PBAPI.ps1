@@ -36,10 +36,20 @@ function Invoke-PBAPI
             'Access-Token' = $PBAPIKey;
         }
 
+        if ($Method -ne 'Get')
+        {
+            Write-Verbose "Converting request body to JSON"
+            $ThisBody = $Body | ConvertTo-Json
+        }
+        else
+        {
+            $ThisBody = $Body
+        }
+
         Write-Verbose "Invoking the API"
         try
         {
-            $Response = Invoke-RestMethod -Headers $Headers -Method $Method -Uri "$PBAPIUrl$RelativePath" -Body $($Body | ConvertTo-Json) -ContentType 'application/json'
+            $Response = Invoke-RestMethod -Headers $Headers -Method $Method -Uri "$PBAPIUrl$RelativePath" -Body $ThisBody -ContentType 'application/json'
         }
         catch
         {
