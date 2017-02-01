@@ -8,7 +8,9 @@
 #>
 function New-PBPush
 {
-    [CmdletBinding(DefaultParameterSetName='Note')]
+    [CmdletBinding(DefaultParameterSetName='Note', 
+                  SupportsShouldProcess=$true,
+                  ConfirmImpact='Medium')]
     [Alias()]
     Param
     (
@@ -61,7 +63,12 @@ function New-PBPush
         [ValidateNotNullOrEmpty()]
         [Alias("file_url")]
         [String]
-        $FileURL
+        $FileURL,
+
+        # Immediately send the push to default devices
+        [Parameter()]
+        [Switch]
+        $Send = $false
     )
 
     Process
@@ -70,6 +77,7 @@ function New-PBPush
         {
             'Note'
             {
+                Write-Verbose "Creating object for Note push"
                 $Push = @{
                     'type' = 'note';
                     'title' = $Title;
@@ -78,6 +86,7 @@ function New-PBPush
             }
             'Link'
             {
+                Write-Verbose "Creating object for Link push"
                 $Push = @{
                     'type' = 'link';
                     'title' = $Title;
@@ -87,6 +96,7 @@ function New-PBPush
             }
             'File'
             {
+                Write-Verbose "Creating object for File push"
                 $Push = @{
                     'type' = 'file';
                     'body' = $Body;
@@ -98,6 +108,18 @@ function New-PBPush
             Default {throw "Bad ParameterSet"}
         }
 
-        return $Push
+        if ($Send)
+        {
+            if ($pscmdlet.ShouldProcess("Push: $($Push.title)", "Send"))
+            {
+                Write-Verbose "Invoking Send-PBPush on new push object"
+                Send-PBPush -Push $Push
+            }
+        }
+        else
+        {
+            Write-Verbose "Outputting the push object"
+            Write-Output $Push
+        }        
     }
 }
