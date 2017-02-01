@@ -66,6 +66,11 @@ function Send-PBPush
                 Write-Verbose "Adding the device_iden to the push object"
                 $ThisPush.Add("device_iden",$DeviceID)
             }
+            'ChannelTag'
+            {
+                Write-Verbose "Adding the channel_tag to the push object"
+                $ThisPush.Add("channel_tag",$ChannelTag)
+            }
             # TODO: Other targets
             Default
             {
