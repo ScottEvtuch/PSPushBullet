@@ -54,16 +54,29 @@ function Send-PBPush
 
     Process
     {
+        # Clone the push in case we pipe multiple targets
+        Write-Debug "Cloning the input Push object"
+        $ThisPush = $Push.Clone()
+
         # Build the request body
-        if ($PSCmdlet.ParameterSetName -eq 'UserDevice')
+        switch ($PSCmdlet.ParameterSetName)
         {
-            $Push.Add("device_iden",$DeviceID)
+            'UserDevice'
+            {
+                Write-Verbose "Adding the device_iden to the push object"
+                $ThisPush.Add("device_iden",$DeviceID)
+            }
+            # TODO: Other targets
+            Default
+            {
+                Write-Verbose "Default push to all devices"
+            }
         }
 
-        if ($pscmdlet.ShouldProcess("Push", "Send"))
+        if ($pscmdlet.ShouldProcess("Push: $($Push.title)", "Send"))
         {
-            # Invoke the API
-            Invoke-PBAPI -RelativePath '/pushes' -Method Post -Body $Push
+            Write-Verbose "Invoking Invoke-PBAPI on the Push object"
+            Invoke-PBAPI -RelativePath '/pushes' -Method Post -Body $ThisPush
         }
     }
 }
