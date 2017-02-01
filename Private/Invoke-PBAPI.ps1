@@ -31,12 +31,12 @@ function Invoke-PBAPI
 
     Process
     {
-        # Set up the headers
+        Write-Verbose "Building headers from API key"
         $Headers = @{
             'Access-Token' = $PBAPIKey;
         }
 
-        # Invoke the API
+        Write-Verbose "Invoking the API"
         try
         {
             $Response = Invoke-RestMethod -Headers $Headers -Method $Method -Uri "$PBAPIUrl$RelativePath" -Body $($Body | ConvertTo-Json) -ContentType 'application/json'
@@ -46,7 +46,7 @@ function Invoke-PBAPI
             throw "API Request failed: $_"
         }
 
-        # Return the response
+        Write-Verbose "Returning the API response"
         return $Response
     }
 }
