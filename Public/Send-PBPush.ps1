@@ -55,13 +55,9 @@ function Send-PBPush
     Process
     {
         # Build the request body
-                switch ($PSCmdlet.ParameterSetName)
+        if ($PSCmdlet.ParameterSetName -eq 'UserDevice')
         {
-            'UserDevice'
-            {
-                $Push.Add("device_iden",$DeviceID)
-            }
-            Default {throw "Bad ParameterSet"}
+            $Push.Add("device_iden",$DeviceID)
         }
 
         if ($pscmdlet.ShouldProcess("Push", "Send"))
