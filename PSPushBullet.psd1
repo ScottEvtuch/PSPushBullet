@@ -4,7 +4,7 @@
 RootModule = 'PSPushBullet'
 
 # Version number of this module.
-ModuleVersion = '0.2'
+ModuleVersion = '0.2.1'
 
 # ID used to uniquely identify this module
 GUID = 'a60db87a-478f-479e-958a-156b6cdbf0c0'
@@ -87,7 +87,7 @@ PrivateData = @{
         # Tags = @()
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://raw.githubusercontent.com/ScottEvtuch/PSPushBullet/master/LICENSE'
 
         # A URL to the main website for this project.
         ProjectUri = 'https://github.com/ScottEvtuch/PSPushBullet'

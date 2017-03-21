@@ -1,10 +1,10 @@
 ﻿<#
 .Synopsis
-   Short description
+   Creates a new push, and optionally pushes it
 .DESCRIPTION
-   Long description
+   Creates a hashtable of properties necessary for sending to "Send-PBPush"
 .EXAMPLE
-   Example of how to use this cmdlet
+   New-PBPush -Title "Example" -Body "Push!"
 #>
 function New-PBPush
 {

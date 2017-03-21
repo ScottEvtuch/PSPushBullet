@@ -1,10 +1,10 @@
 ﻿<#
 .Synopsis
-   Short description
+   Gets devices from the associated Pushbullet account
 .DESCRIPTION
-   Long description
+   Uses "Invoke-PBAPI" to retrieve device objects
 .EXAMPLE
-   Example of how to use this cmdlet
+   Get-PBDevices | where type -EQ "windows"
 #>
 function Get-PBDevices
 {

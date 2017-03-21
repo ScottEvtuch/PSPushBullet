@@ -1,10 +1,10 @@
 ﻿<#
 .Synopsis
-   Short description
+   Gets information on a Pushbullet channel
 .DESCRIPTION
-   Long description
+   Uses "Invoke-PBAPI" to pull channel information for a specific channel
 .EXAMPLE
-   Example of how to use this cmdlet
+   Get-PBChannelInfo -ChannelTag "ExampleChannel"
 #>
 function Get-PBChannelInfo
 {

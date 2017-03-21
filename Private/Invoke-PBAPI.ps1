@@ -1,10 +1,10 @@
 ﻿<#
 .Synopsis
-   Short description
+   Invokes the Pushbullet API
 .DESCRIPTION
-   Long description
+   Uses "Invoke-RestMethod" to call the Pushbullet API at $PBAPIUrl
 .EXAMPLE
-   Example of how to use this cmdlet
+   Invoke-PBAPI -RelativePath '/pushes' -Method Post -Body $Push
 #>
 function Invoke-PBAPI
 {

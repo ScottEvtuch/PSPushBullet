@@ -1,10 +1,12 @@
 ﻿<#
 .Synopsis
-   Short description
+   Sends a push to the provided destination
 .DESCRIPTION
-   Long description
+   Uses "Invoke-PBAPI" to send a push
 .EXAMPLE
-   Example of how to use this cmdlet
+   Send-PBPush -Push (New-PBPush -Title "Example" -Body "Push!")
+.EXAMPLE
+   New-PBPush -Title "Example" -Body "Push!" | Send-PBPush -ChannelTag "ExampleChannel"
 #>
 function Send-PBPush
 {
